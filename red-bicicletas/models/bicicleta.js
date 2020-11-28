@@ -38,12 +38,12 @@ Bicicleta.removeById = function(aBiciId){
     }
 }
 
-var a = new Bicicleta (1, 'rojo', 'urbana', [-34.6012424, -58.3861497]);
+/*var a = new Bicicleta (1, 'rojo', 'urbana', [-34.6012424, -58.3861497]);
 var b = new Bicicleta (2, 'blanco', 'urbana', [-34.596932, -58.3808287]);
 var c = new Bicicleta (3, 'gris', 'urbana', [-34.596732, -58.3808257]);
 
 Bicicleta.add(a);
 Bicicleta.add(b);
-Bicicleta.add(c);
+Bicicleta.add(c);*/
 
 module.exports = Bicicleta; //Usamos el exports para que otro modulo pueda importar Bicicleta
