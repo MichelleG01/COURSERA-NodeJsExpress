@@ -1,0 +1,35 @@
+extends ../layout
+
+block content
+    //defino link para crear
+    a(href='/bicicletas/create') Agregar nueva bicicleta
+    table.table
+        thead
+            tr
+                th(scope= 'col') #
+                th(scope= 'col') Color
+                th(scope= 'col') Modelo
+                th(scope= 'col') Ubicacion
+                th(scope= 'col')
+                th(scope= 'col')
+        tbody
+            //con el each le decimos que itere todo el listado de "bicis", uno por uno los 
+            //elementos que va a tener esa lista de bicicletas, y cada elemento que estaría recorriendo en un 
+            //momento dado, lo guarda en "bici" 
+            //nosotros le pasamos bicis (que esta en el controler) 
+            each bici in bicis 
+
+                tr
+                    th(scope= 'row')
+                      =bici.id
+                    td= bici.color
+                    td= bici.modelo
+                    td= bici.ubicacion
+                    td
+                        //defino el link para el update, que quedará dentro de "create"
+                        a(href= 'bicicletas/' + bici.id + '/update') Editar
+                    td
+                        form.inline(method='post' action='bicicletas/' + bici.id + '/delete')
+                            input(type='hidden' name='id' value= bici.id)
+                            button.link-button(type='submit' name='submit_param' value='submit_value' class='btn')
+                                ='Eliminar'
