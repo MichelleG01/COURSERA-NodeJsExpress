@@ -9,11 +9,10 @@ var usersRouter = require('./routes/users');
 var bicicletasRouter = require('./routes/bicicletas');
 //defino ruta API
 var bicicletasAPIRouter = require('./routes/api/bicicletas');
+//agrego ruta Usuarios
+var usuariosAPIRouter = require('./routes/api/usuarios');
 
 var app = express();
-
-//agrego ruta Usuarios
-//var usuariosAPIRouter = require('./routes/api/usuarios');
 
 //INICIO CONFIGURACION MONGO DB
 //Traemos la referencia PARA USAR MONGO DB 
@@ -44,6 +43,8 @@ app.use('/users', usersRouter);
 app.use('/bicicletas', bicicletasRouter );
 //le decimos que use la ruta api
 app.use('/api/bicicletas', bicicletasAPIRouter);
+//ruta API usuarios
+app.use('/api/usuarios', usuariosAPIRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
