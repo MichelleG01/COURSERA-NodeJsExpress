@@ -12,6 +12,21 @@ var bicicletasAPIRouter = require('./routes/api/bicicletas');
 
 var app = express();
 
+//agrego ruta Usuarios
+//var usuariosAPIRouter = require('./routes/api/usuarios');
+
+//INICIO CONFIGURACION MONGO DB
+//Traemos la referencia PARA USAR MONGO DB 
+var mongoose = require('mongoose');
+//const { promises } = require('fs');
+//Cremos una variable para que tenga la conexión con la DB:
+var mongoDB = 'mongodb://localhost/red_bicicletas';
+mongoose.connect(mongoDB, { useNewUrlParser: true });
+mongoose.Promise = global.Promise;
+var db = mongoose.connection; //guardo la conexión en db
+db.on('error', console.error.bind(console, 'MongoDB conection error: '));
+//...FIN  CONFIGURACION MONGO DB
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
