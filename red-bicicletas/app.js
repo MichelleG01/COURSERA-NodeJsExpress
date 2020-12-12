@@ -12,12 +12,17 @@ var bicicletasAPIRouter = require('./routes/api/bicicletas');
 //agrego ruta Usuarios
 var usuariosAPIRouter = require('./routes/api/usuarios');
 
+//Defino variables para TOKEN y USUARIOS:
+var usuariosRouter = require('./routes/usuarios');
+var tokenRouter = require ('./routes/token');
+
 var app = express();
 
 //INICIO CONFIGURACION MONGO DB
 //Traemos la referencia PARA USAR MONGO DB 
 var mongoose = require('mongoose');
 //const { promises } = require('fs');
+const usuario = require('./models/usuario');
 //Cremos una variable para que tenga la conexión con la DB:
 var mongoDB = 'mongodb://localhost/red_bicicletas';
 mongoose.connect(mongoDB, { useNewUrlParser: true });
@@ -37,9 +42,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//para usuarios y token 
+app.use('/', indexRouter);
+app.use('/usuarios', usuariosRouter);
+app.use('/token', tokenRouter);
+
 //Para definir el uso del modulo
-app.use('/', indexRouter); //definimos la ruta del index
-app.use('/users', usersRouter);
+app.use('/', indexRouter); //definimos la ruta del index, ubica el modulo IndexRouter en la ruta raiz '/'
+app.use('/users', usersRouter); // La aplicacion indica al servidor que escuche en esta ruta lo que se le va 
+  //a informar el modulo de rutas, redirecciona y acciona los métodos creados allá
 app.use('/bicicletas', bicicletasRouter );
 //le decimos que use la ruta api
 app.use('/api/bicicletas', bicicletasAPIRouter);

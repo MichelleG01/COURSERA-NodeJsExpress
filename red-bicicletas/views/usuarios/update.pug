@@ -1,0 +1,27 @@
+extends ../layout
+
+block content
+    //le agregamos un link a Usuarios
+    a(href='/usuarios') Volver
+
+    br
+    br
+    br
+
+    h1 Actualizando Usuario
+
+    br
+    br
+    //Creamos un formulario con el metodo post que apuntara a la action de /bicicletas/create
+    //interpolamos con ${bici.id}, importante el uso de las comillas francesas
+    form(action=`/usuarios/${usuario.id}/update` method='post')
+        .form-group
+            label(for="nombre") Nombre:
+            input#nombre.form-control(type='text' name='nombre' value = usuario.nombre class=errors.nombre ? 'is-invalid': '')
+            if errors.nombre
+                small#nombreHelp.text-danger
+                    =errors.nombre.message
+       
+        br 
+        br
+        input.btn(type='submit' value='OK')

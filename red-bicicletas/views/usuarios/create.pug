@@ -1,0 +1,43 @@
+extends ../layout
+
+block content
+    //le agregamos un link a bicicletas
+    a(href='/usuarios') Volver
+
+    br
+    br
+    br
+
+    h1 Nuevo Usuario
+
+    br
+    br
+    //Creamos un formulario con el metodo post que apuntara a la action de /usuarios/create
+    form(action='/usuarios/create' method='post')
+        .form-group
+            label(for="nombre") Nombre:
+            input#nombre.form-controll(type='text' name='nombre' value = usuario.nombre class=errors.nombre ? 'is-invalid': '')
+            if errors.nombre
+                small#nombreHelp.text-danger
+                    =errors.nombre.message
+        .form-group
+            label(for="email") Email:
+            input#email.form-controll(type='text' name='email' value = usuario.email class=errors.email ? 'is-invalid': '')
+            if errors.email
+                small#emailHelp.text-danger
+                    =errors.email.message
+        .form-group
+            label(for="pwd") Password:
+            input#pwd.form-controll(type='password' name='password' class=errors.password ? 'is-invalid': '')
+            if errors.password
+                small#passwordHelp.text-danger
+                    =errors.password.message                       
+        .form-group
+            label(for="confirm_pwd") Confirmar Password:
+            input#confirm_pwd.form-controll(type='password' name='confirm_password' class=errors.confirm_password ? 'is-invalid': '')
+            if errors.confirm_pwd
+                small#confirm_pwdHelp.text-danger
+                    =errors.confirm_pwd.message                     
+        br
+        br
+        input.btn.btn-primary(type="submit" value="OK")
