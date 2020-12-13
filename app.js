@@ -1,3 +1,6 @@
+//Para indicarle a MOngo que utilizaremos las variables de ambiente del archivo .env:
+require('dotenv').config();
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -43,8 +46,14 @@ app.use(session({
 var mongoose = require('mongoose');
 //const { promises } = require('fs');
 const Usuario = require('./models/usuario');
-//Cremos una variable para que tenga la conexión con la DB:
-var mongoDB = 'mongodb://localhost/red_bicicletas';
+//Cremos una variable para que tenga la conexión con la DB: //usar si estamos en ambiente de desarrollo
+//var mongoDB = 'mongodb://localhost/red_bicicletas';
+//Configuracion a conexion global DB - Si estamos en ambiente de produccion usar:
+//var mongoDB = 'mongodb+srv://admin:BydetQFybBTMhNoz@red-bicicletas.ktudx.mongodb.net/<dbname>?retryWrites=true&w=majority';
+
+//Si desplegamos en local se utiliza la db local pero al desplegar con heroku el identifica que la url de la db remota
+//ya que se configuro previamente (Para que trabaje con el cluster en la nube, que está definido en el archivo .env)
+var mongoDB = process.env.MONGO_URI;
 mongoose.connect(mongoDB, { useNewUrlParser: true });
 mongoose.Promise = global.Promise;
 var db = mongoose.connection; //guardo la conexión en db
